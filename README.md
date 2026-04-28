@@ -4,7 +4,7 @@ A small Android notes app, intentionally over-engineered around mobile data-at-r
 
 - **Module:** `app/` (single Android module, Kotlin + Compose, minSdk 26, targetSdk 35)
 - **Crypto stack:** Argon2id (RFC 9106) → Android Keystore (AES/GCM, hardware-backed when available) → SQLCipher 4.6.1 → Tink AEAD 1.13
-- **Status:** v0.2.0, on-device verified on a physical Samsung device. Connected-instrumented suite staged but not run in CI yet.
+- **Status:** v0.1.0, codebase ported from the [cashregister](https://github.com/Bruce188/cashregister) security retrofit. Connected-instrumented suite staged; on-device verification is on the backlog.
 
 ---
 
