@@ -1,0 +1,57 @@
+# Plan §10.1 — narrow Detekt config: ban android.util.Log.* in production
+# code. Other rules are intentionally OFF — this run is scoped to security
+# regressions only, not generic style. `buildUponDefaultConfig = false` in
+# app/build.gradle.kts pairs with this file.
+#
+# Test sources are excluded by `source.setFrom(files("src/main/java"))` in
+# the detekt block so `android.util.Log` remains usable in tests.
+#
+# To extend the allowlist later, prepend method patterns and rebuild
+# baseline.xml (`./gradlew :app:detektBaseline`).
+
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+
+style:
+  active: true
+  ForbiddenMethodCall:
+    active: true
+    methods:
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.v"
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.d"
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.i"
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.w"
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.e"
+      - reason: "Plan §10.1: android.util.Log leaks data to logcat. No exceptions in production sources."
+        value: "android.util.Log.wtf"
+      # Review B10 — ban Argon2Params.default() outside the calibration
+      # baseline. Production callers MUST read App.argon2Params (the cached,
+      # calibrated value). Legitimate exceptions (KeyManager constructor
+      # default, Argon2Kdf derive default, Argon2Calibrator probe baseline,
+      # App cache seed) carry @Suppress("ForbiddenMethodCall") with rationale.
+      - reason: "Review B10: use App.argon2Params (calibrated) instead. Legitimate exceptions: KeyManager ctor default param, Argon2Kdf.derive default param, Argon2Calibrator baseline, App.argon2Params seed — all marked @Suppress."
+        value: "com.notes.hsnotes.data.security.Argon2Params.Companion.default"
+
+# Other rulesets explicitly disabled — Plan §10.1 scope is narrow.
+comments:
+  active: false
+complexity:
+  active: false
+coroutines:
+  active: false
+empty-blocks:
+  active: false
+exceptions:
+  active: false
+naming:
+  active: false
+performance:
+  active: false
+potential-bugs:
+  active: false

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HS Notes</string>
+
+    <!-- Common -->
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_back">Back</string>
+
+    <!-- Notes list -->
+    <string name="notes_title">HS Notes</string>
+    <string name="notes_action_settings">Settings</string>
+    <string name="notes_action_new">New note</string>
+    <string name="notes_empty">No notes yet. Tap + to write one.</string>
+    <string name="notes_snackbar_deleted">Deleted</string>
+    <string name="notes_snackbar_undo">Undo</string>
+    <string name="notes_untitled">(untitled)</string>
+
+    <!-- Note edit -->
+    <string name="edit_title_new">New note</string>
+    <string name="edit_title_edit">Edit note</string>
+    <string name="edit_title_label">Title</string>
+    <string name="edit_body_label">Body</string>
+    <string name="edit_tag_label">Tag (optional)</string>
+    <string name="edit_save">Save</string>
+    <string name="edit_dlg_delete_title">Delete note?</string>
+    <string name="edit_dlg_delete_text">This cannot be undone.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_language">Language</string>
+    <string name="settings_language_label">Language</string>
+    <string name="settings_lang_english">English</string>
+    <string name="settings_lang_french">Français</string>
+    <string name="settings_lang_dutch">Nederlands</string>
+    <string name="settings_section_lock">Lock</string>
+    <string name="settings_lock_timeout_label">Auto-lock after</string>
+    <string name="settings_lock_timeout_30s">30 seconds</string>
+    <string name="settings_lock_timeout_2m">2 minutes</string>
+    <string name="settings_lock_timeout_5m">5 minutes</string>
+    <string name="settings_lock_timeout_15m">15 minutes</string>
+    <string name="settings_section_backup">Backup</string>
+    <string name="settings_backup_export">Export</string>
+    <string name="settings_backup_import">Import</string>
+    <string name="settings_backup_passphrase_label">Backup passphrase</string>
+    <string name="settings_backup_passphrase_warning">Choose a different passphrase from your unlock passphrase. Backups are encrypted with this passphrase only — there is no recovery if you forget it.</string>
+    <string name="settings_backup_passphrase_export_title">Set backup passphrase</string>
+    <string name="settings_backup_passphrase_import_title">Enter backup passphrase</string>
+    <string name="settings_dlg_import_title">Import backup</string>
+    <string name="settings_dlg_import_text">Merge into current notes, or replace everything?</string>
+    <string name="settings_dlg_import_merge">Merge</string>
+    <string name="settings_dlg_import_replace">Replace</string>
+    <string name="settings_version">HS Notes · v0.2.0</string>
+
+    <!-- Destructive: wipe-all-data -->
+    <string name="settings_section_destructive">Danger zone</string>
+    <string name="settings_wipe_button">Wipe all data</string>
+    <string name="settings_wipe_confirm_1_title">Wipe all data?</string>
+    <string name="settings_wipe_confirm_1_text">This permanently destroys all notes, settings, and the unlock key. There is no recovery, no backup, no undo.</string>
+    <string name="settings_wipe_confirm_1_continue">Continue</string>
+    <string name="settings_wipe_confirm_2_title">Are you absolutely sure?</string>
+    <string name="settings_wipe_confirm_2_text">Tap WIPE to destroy everything. After this, only first-time setup remains.</string>
+    <string name="settings_wipe_confirm_2_action">WIPE</string>
+    <string name="settings_wipe_done">All data wiped.</string>
+
+    <!-- Security setup -->
+    <string name="security_setup_title">Set up secure access</string>
+    <string name="security_setup_warning">There is no recovery. If you forget the passphrase or enter five wrong attempts in a row, every note, tag, and setting is destroyed permanently. Write the passphrase down somewhere only you can reach.</string>
+    <string name="security_setup_ack">I understand: forgetting the passphrase means losing every note, with no recovery.</string>
+    <string name="security_setup_passphrase_label">Passphrase</string>
+    <string name="security_setup_passphrase_confirm_label">Confirm passphrase</string>
+    <string name="security_setup_passphrase_mismatch">Passphrases do not match</string>
+    <string name="security_setup_panicpin_label">Panic PIN (optional)</string>
+    <string name="security_setup_panicpin_helper">If entered at unlock, silently destroys all data. Minimum 6 digits.</string>
+    <string name="security_setup_panicpin_too_short">Panic PIN must be at least 6 digits</string>
+    <string name="security_setup_panicpin_same_as_passphrase">Panic PIN must differ from the passphrase</string>
+    <string name="security_setup_continue">Continue</string>
+    <string name="security_setup_cooldown">Please read the warning. Continue available in %1$d s</string>
+
+    <!-- Security gate -->
+    <string name="security_gate_title">Unlock</string>
+    <string name="security_gate_passphrase_label">Passphrase</string>
+    <string name="security_gate_attempt_counter">Attempt %1$d / %2$d</string>
+    <string name="security_gate_failed">Incorrect — try again</string>
+    <string name="security_gate_warning_n_remaining">Warning: %1$d attempt(s) before all data is destroyed</string>
+    <string name="security_gate_backoff_seconds">Wait %1$d s</string>
+    <string name="security_gate_unlock">Unlock</string>
+
+    <!-- Migration wizard -->
+    <string name="migration_title">Securing your data</string>
+    <string name="migration_subtitle">Re-encrypting your existing notes with your new passphrase. Do not close the app.</string>
+    <string name="migration_progress">%1$d / %2$d rows</string>
+    <string name="migration_progress_starting">Reading existing data&#8230;</string>
+    <string name="migration_error_title">Migration could not finish</string>
+    <string name="migration_error_recovery">Your data is still safe. Sign in again to retry the upgrade.</string>
+    <string name="migration_back_to_login">Back to sign-in</string>
+</resources>

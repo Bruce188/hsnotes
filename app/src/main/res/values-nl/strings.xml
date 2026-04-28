@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HS Notes</string>
+
+    <!-- Common -->
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Annuleren</string>
+    <string name="common_save">Opslaan</string>
+    <string name="common_delete">Verwijderen</string>
+    <string name="common_back">Terug</string>
+
+    <!-- Notes list -->
+    <string name="notes_title">HS Notes</string>
+    <string name="notes_action_settings">Instellingen</string>
+    <string name="notes_action_new">Nieuwe notitie</string>
+    <string name="notes_empty">Nog geen notities. Tik + om er een te schrijven.</string>
+    <string name="notes_snackbar_deleted">Verwijderd</string>
+    <string name="notes_snackbar_undo">Ongedaan maken</string>
+    <string name="notes_untitled">(zonder titel)</string>
+
+    <!-- Note edit -->
+    <string name="edit_title_new">Nieuwe notitie</string>
+    <string name="edit_title_edit">Notitie bewerken</string>
+    <string name="edit_title_label">Titel</string>
+    <string name="edit_body_label">Inhoud</string>
+    <string name="edit_tag_label">Label (optioneel)</string>
+    <string name="edit_save">Opslaan</string>
+    <string name="edit_dlg_delete_title">Notitie verwijderen?</string>
+    <string name="edit_dlg_delete_text">Dit kan niet ongedaan worden gemaakt.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_section_language">Taal</string>
+    <string name="settings_language_label">Taal</string>
+    <string name="settings_lang_english">English</string>
+    <string name="settings_lang_french">Français</string>
+    <string name="settings_lang_dutch">Nederlands</string>
+    <string name="settings_section_lock">Vergrendeling</string>
+    <string name="settings_lock_timeout_label">Automatisch vergrendelen na</string>
+    <string name="settings_lock_timeout_30s">30 seconden</string>
+    <string name="settings_lock_timeout_2m">2 minuten</string>
+    <string name="settings_lock_timeout_5m">5 minuten</string>
+    <string name="settings_lock_timeout_15m">15 minuten</string>
+    <string name="settings_section_backup">Back-up</string>
+    <string name="settings_backup_export">Exporteren</string>
+    <string name="settings_backup_import">Importeren</string>
+    <string name="settings_backup_passphrase_label">Back-upwachtwoord</string>
+    <string name="settings_backup_passphrase_warning">Kies een ander wachtwoord dan uw ontgrendelingswachtwoord. Back-ups zijn alleen versleuteld met dit wachtwoord — er is geen herstel als u het vergeet.</string>
+    <string name="settings_backup_passphrase_export_title">Back-upwachtwoord instellen</string>
+    <string name="settings_backup_passphrase_import_title">Back-upwachtwoord invoeren</string>
+    <string name="settings_dlg_import_title">Back-up importeren</string>
+    <string name="settings_dlg_import_text">Samenvoegen met huidige notities of alles vervangen?</string>
+    <string name="settings_dlg_import_merge">Samenvoegen</string>
+    <string name="settings_dlg_import_replace">Vervangen</string>
+    <string name="settings_version">HS Notes · v0.2.0</string>
+
+    <!-- Destructive: wipe-all-data -->
+    <string name="settings_section_destructive">Gevarenzone</string>
+    <string name="settings_wipe_button">Alle gegevens wissen</string>
+    <string name="settings_wipe_confirm_1_title">Alle gegevens wissen?</string>
+    <string name="settings_wipe_confirm_1_text">Dit vernietigt permanent alle notities, instellingen en de ontgrendelingssleutel. Geen herstel, geen back-up, geen ongedaan maken.</string>
+    <string name="settings_wipe_confirm_1_continue">Doorgaan</string>
+    <string name="settings_wipe_confirm_2_title">Bent u absoluut zeker?</string>
+    <string name="settings_wipe_confirm_2_text">Tik WISSEN om alles te vernietigen. Daarna blijft alleen eerste-keer-instellen over.</string>
+    <string name="settings_wipe_confirm_2_action">WISSEN</string>
+    <string name="settings_wipe_done">Alle gegevens gewist.</string>
+
+    <!-- Security setup -->
+    <string name="security_setup_title">Beveiligde toegang instellen</string>
+    <string name="security_setup_warning">Er is geen herstel. Als u het wachtwoord vergeet of vijf keer achter elkaar fout invoert, wordt elke notitie, label en instelling permanent vernietigd. Schrijf het wachtwoord op een plek waar alleen u bij kunt.</string>
+    <string name="security_setup_ack">Ik begrijp het: het wachtwoord vergeten betekent dat alle notities verloren gaan, zonder herstel.</string>
+    <string name="security_setup_passphrase_label">Wachtwoord</string>
+    <string name="security_setup_passphrase_confirm_label">Wachtwoord bevestigen</string>
+    <string name="security_setup_passphrase_mismatch">Wachtwoorden komen niet overeen</string>
+    <string name="security_setup_panicpin_label">Paniek-PIN (optioneel)</string>
+    <string name="security_setup_panicpin_helper">Bij invoer tijdens ontgrendeling vernietigt deze stilletjes alle gegevens. Minimaal 6 cijfers.</string>
+    <string name="security_setup_panicpin_too_short">Paniek-PIN moet minimaal 6 cijfers zijn</string>
+    <string name="security_setup_panicpin_same_as_passphrase">Paniek-PIN moet verschillen van het wachtwoord</string>
+    <string name="security_setup_continue">Doorgaan</string>
+    <string name="security_setup_cooldown">Lees de waarschuwing. Doorgaan beschikbaar over %1$d s</string>
+
+    <!-- Security gate -->
+    <string name="security_gate_title">Ontgrendelen</string>
+    <string name="security_gate_passphrase_label">Wachtwoord</string>
+    <string name="security_gate_attempt_counter">Poging %1$d / %2$d</string>
+    <string name="security_gate_failed">Onjuist — probeer opnieuw</string>
+    <string name="security_gate_warning_n_remaining">Waarschuwing: %1$d poging(en) voordat alle gegevens worden vernietigd</string>
+    <string name="security_gate_backoff_seconds">Wacht %1$d s</string>
+    <string name="security_gate_unlock">Ontgrendelen</string>
+
+    <!-- Migration wizard -->
+    <string name="migration_title">Uw gegevens beveiligen</string>
+    <string name="migration_subtitle">Bestaande notities opnieuw versleutelen met uw nieuwe wachtwoord. Sluit de app niet.</string>
+    <string name="migration_progress">%1$d / %2$d rijen</string>
+    <string name="migration_progress_starting">Bestaande gegevens lezen&#8230;</string>
+    <string name="migration_error_title">Migratie kon niet worden voltooid</string>
+    <string name="migration_error_recovery">Uw gegevens zijn nog steeds veilig. Meld opnieuw aan om de upgrade opnieuw te proberen.</string>
+    <string name="migration_back_to_login">Terug naar aanmelden</string>
+</resources>
