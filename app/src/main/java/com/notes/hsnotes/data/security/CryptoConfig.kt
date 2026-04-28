@@ -6,8 +6,7 @@ package com.notes.hsnotes.data.security
  * Values are immutable defaults. The Argon2 calibrator (Task 10.2) may persist
  * adjusted memory in SecurePrefs but never below [ARGON2_MEMORY_FLOOR_KIB].
  *
- * Plan-mode reference: `~/.claude/plans/sounds-great-the-app-groovy-kahan.md`
- * § Architecture, § Wipe Ladder, § Anti-Forensics.
+ * See README §§ Defense layers, Wipe ladder, Anti-forensics for the surrounding rationale.
  */
 object CryptoConfig {
 
