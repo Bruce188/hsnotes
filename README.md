@@ -1,10 +1,27 @@
 # HS Notes
 
-A small Android notes app, intentionally over-engineered around mobile data-at-rest security. The application surface (a single notes table — title, body, optional tag, timestamps; list + edit screens) is a vehicle; the point of the codebase is the security retrofit underneath. Built as a portfolio piece to demonstrate end-to-end defense-in-depth on Android against a realistic offline-forensics adversary.
+A small Android notes app, intentionally over-engineered around mobile data-at-rest security. The visible surface — a single notes table (title, body, optional tag, timestamps; list + edit screens) — is a vehicle. **The codebase exists to explore secure-by-design Android development end-to-end against a realistic offline-forensics adversary, and to put the specialist vocabulary into its proper place** rather than handwave it: **Argon2id** (RFC 9106) key derivation, **envelope encryption** with a **Keystore-bound KEK** (StrongBox-preferred), **SQLCipher** page-level encryption, **AEAD**-protected SharedPreferences via **Tink**, an **attested-clock dead-man** wipe trigger, a tiered **wipe ladder** (`LOCK` / `SOFT` / `CRYPTO_ERASE` / `NUCLEAR`), **anti-oracle** UI discipline, **panic PIN** with observable-cost equivalence, `FLAG_SECURE` recents/screenshot blanking, and a custom `HSBK` backup envelope with 4 KiB size-fingerprint padding.
 
 - **Module:** `app/` (single Android module, Kotlin + Compose, minSdk 26, targetSdk 35)
 - **Crypto stack:** Argon2id (RFC 9106) → Android Keystore (AES/GCM, hardware-backed when available) → SQLCipher 4.6.1 → Tink AEAD 1.13
 - **Status:** v0.1.0, codebase ported from a private cashregister security-retrofit project. Connected-instrumented suite staged; on-device verification is on the backlog.
+
+---
+
+## Why this exists
+
+This is a portfolio project built **explicitly to explore secure mobile design** — and to use the specialist vocabulary in the places it actually applies, rather than abstractly. Every term in the list below appears in the source with a real implementation behind it, not as a buzzword:
+
+`KDF` · `salt` · `nonce` · `KEK` · `DEK` · `AEAD` · `AES/GCM` · `Argon2id` · `Keystore-bound key` · `StrongBox` · `envelope encryption` · `page-level encryption` · `cipher_memory_security` · `secure_delete` · `journal_mode = MEMORY` · `attested clock` · `dead-man check` · `crypto-erase` · `wipe ladder` · `anti-oracle` · `panic PIN` · `observable-cost equivalence` · `FLAG_SECURE` · `MediaProjection blanking` · `CharArray hygiene` · `zeroize` · `HSBK envelope` · `size-fingerprint padding`
+
+The notes-app contract is deliberately tiny — "small enough that the security retrofit can dominate the codebase without becoming abstract." The interesting parts are:
+
+- The structure of the **wipe ladder** and how each level's preconditions and postconditions are verified.
+- The interplay between **Argon2 calibration**, the **dead-man check**, and the **wipe paths** — each depends on something that has to be true before any of the others run.
+- The discipline around plaintext-by-design state vs encrypted state, and the documented rationale for every plaintext field.
+- The **on-device verification protocol** in `documentation/security-verification.md`, meant to be run by hand with `adb` to demonstrate the threat-model claims hold against a real filesystem dump.
+
+If anything looks wrong or under-specified, that is also part of the point — feedback welcome.
 
 ---
 
@@ -181,16 +198,3 @@ documentation/
 ```
 
 The `documentation/security-verification.md` runbook contains an end-to-end forensic black-box check: install, set up, write notes, `adb pull`, attempt to open `notes.db` with `sqlite3`, run `strings` over the DataStore + secure prefs blobs, exercise each of the four wipe paths, and verify the encrypted-backup magic.
-
----
-
-## Why this exists
-
-This is a portfolio project. The contract for the notes app itself is "small enough that the security retrofit can dominate the codebase without becoming abstract." The interesting parts are:
-
-- The structure of the wipe ladder and how each level's preconditions and postconditions are verified.
-- The interplay between Argon2 calibration, the dead-man check, and the wipe paths — each of those depends on something that has to be true before any of the others run.
-- The discipline around plaintext-by-design state vs encrypted state, and the documented rationale for every plaintext field.
-- The on-device verification protocol in `documentation/security-verification.md`, which is meant to be run by hand with `adb` to demonstrate that the threat-model claims hold against a real filesystem dump.
-
-If anything looks wrong or under-specified, that is also part of the point — feedback welcome.
