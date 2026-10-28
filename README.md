@@ -61,13 +61,13 @@ Under that model, every note byte at rest must be cryptographically inaccessible
 └─────────────────────────────────────────────────────────────┘
 
 Adjacent surfaces:
-- Tink AEAD-encrypted SharedPreferences for sensitive UI state
+- Tink AEAD-encrypted SharedPreferences for sensitive UI state (implemented, not yet bound; see point 4)
 - Plaintext DataStore for explicitly non-sensitive auth state
   (failCount, last-auth epoch, panic-PIN hash, calibrated Argon2 m)
 - Encrypted backup envelope:  HSBK-magic + Argon2id + AES/GCM + 4 KiB padding
 ```
 
-### 1. Passphrase → DEK derivation
+### 1. Passphrase → KEK derivation
 
 - **Argon2id** with the parameters from RFC 9106, security-fixed `t = 4` and `p = 2`.
 - **Memory cost is calibrated** on first launch by `Argon2Calibrator` — the prober halves `m` until a probe derive lands inside the target window (~1 s) on the actual device, with a hard floor of 64 MiB so a slow eMMC device cannot accidentally drop below the RFC 9106 lower bound for a low-threat scenario.
@@ -93,8 +93,8 @@ Adjacent surfaces:
 ### 4. SharedPreferences (Tink)
 
 - Sensitive UI state (lock timeout, etc.) is meant to route through a `SecurePrefs` adapter wrapping a Tink AES/GCM AEAD keyset. The adapter is implemented and covered by an instrumented test, but nothing in the unlock path calls `SettingsStore.bindSecurePrefs` yet, so the lock timeout currently falls back to plaintext DataStore.
-- The Tink keyset is itself encrypted under an AES/GCM key built from the DEK, so those prefs are only readable after unlock; once the DEK is dropped, reads throw `LockedException`.
-- Auth-pre-unlock state (`failCount`, `lastAuthSuccessEpoch`, `panicPinHash`, calibrated `m`) is held in plaintext DataStore by design: the wipe ladder, dead-man check, and panic-PIN compare must all run *before* the DEK has been derived.
+- The Tink keyset is itself encrypted under an AES/GCM key built from the DEK, so those prefs are only readable after unlock; once `dispose()` drops the in-memory primitive, reads throw `LockedException`.
+- Auth-pre-unlock state (`failCount`, `lastAuthSuccessEpoch`, `panicPinHash`, calibrated `m`) is held in plaintext DataStore by design: the wipe ladder, dead-man check, and panic-PIN compare must all run *before* the DEK has been unwrapped.
 
 ### 5. Wipe ladder
 
